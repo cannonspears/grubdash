@@ -87,6 +87,6 @@ module.exports = {
     dishesPropertyIsValid,
     update,
   ],
-  delete: [orderExists, destroy],
+  destroy: [orderExists, destroy],
   list,
 };
