@@ -90,7 +90,7 @@ function update(req, res) {
   res.json({ data: res.locals.order });
 }
 
-function destroy() {
+function destroy(req, res, next) {
   const { orderId } = req.params;
   const index = orders.findIndex((order) => order.id === Number(orderId));
   const deletedOrders = orders.splice(index, 1);
