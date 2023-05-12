@@ -90,6 +90,17 @@ function update(req, res) {
   res.json({ data: res.locals.order });
 }
 
+function orderStatusPending(req, res, next) {
+  const { status } = res.locals.order;
+  if (status !== "pending") {
+    return next({
+      status: 400,
+      message: `Order cannot be deleted if pending.`,
+    });
+  }
+  next();
+}
+
 function destroy(req, res, next) {
   const { orderId } = req.params;
   const index = orders.findIndex((order) => order.id === Number(orderId));
@@ -105,6 +116,6 @@ module.exports = {
   create: [checkOrder, create],
   read: [orderExists, read],
   update: [orderExists, checkOrder, matchId, statusPropertyIsValid, update],
-  destroy: [orderExists, destroy],
+  destroy: [orderExists, orderStatusPending, destroy],
   list,
 };
