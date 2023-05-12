@@ -32,7 +32,7 @@ describe("dishes router", () => {
       expect(response.body.data.id).not.toBeUndefined();
       expect(response.body.data.name).toEqual(expectedName);
       expect(response.status).toBe(201);
-      expect(dishes.find(dish => dish.name === expectedName)).not.toBeUndefined();
+      expect(dishes.find((dish) => dish.name === expectedName)).not.toBeUndefined();
     });
 
     test("returns 400 if name is missing", async () => {
@@ -134,7 +134,12 @@ describe("dishes router", () => {
         .post(ATTACHED_PATH)
         .set("Accept", "application/json")
         .send({
-          data: { name: "name", description: "description", price: Number.MIN_SAFE_INTEGER, image_url: "none" },
+          data: {
+            name: "name",
+            description: "description",
+            price: Number.MIN_SAFE_INTEGER,
+            image_url: "none",
+          },
         });
 
       expect(response.body.data).toBeUndefined();
@@ -598,8 +603,7 @@ describe("dishes router", () => {
       const original = {
         id: "18",
         name: "Bangers And Mash",
-        description:
-          "finger sausages alongside a pile of mashed potatoes drizzled with gravy.",
+        description: "finger sausages alongside a pile of mashed potatoes drizzled with gravy.",
         price: 18,
       };
 
@@ -613,7 +617,7 @@ describe("dishes router", () => {
       expect(response.body.error).not.toBeUndefined();
       expect(response.status).toBe(405);
     });
-  
+
     test("returns 405 for non-existent dish", async () => {
       const response = await request(app)
         .delete(`${ATTACHED_PATH}/77`)
@@ -637,17 +641,14 @@ describe("dishes router", () => {
         {
           id: "21",
           name: "Clootie Dumpling",
-          description:
-            "A dessert pudding made of sweet stuff, like dough, dried fruits, and sugar",
+          description: "A dessert pudding made of sweet stuff, like dough, dried fruits, and sugar",
           price: 21,
         },
       ];
 
       dishes.push(...expected);
 
-      const response = await request(app)
-        .get(ATTACHED_PATH)
-        .set("Accept", "application/json");
+      const response = await request(app).get(ATTACHED_PATH).set("Accept", "application/json");
 
       expect(response.body.error).toBeUndefined();
       expect(response.body.data).toEqual(expected);

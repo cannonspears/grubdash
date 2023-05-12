@@ -15,6 +15,31 @@ function dishExists(req, res, next) {
   });
 }
 
+// function dishMatch(req, res, next) {
+//   const { dishId } = req.params;
+//   const { data: { id } = {} } = req.body;
+//   if (dishId === id) {
+//     return next();
+//   }
+//   next({
+//     status: 400,
+//     message: `Data id must match route id: ${id}`,
+//   });
+// }
+
+function matchId(req, res, next) {
+  const dishId = req.params.dishId;
+  const { id } = req.body.data;
+
+  if (!id || id === dishId) {
+    return next();
+  }
+  next({
+    status: 400,
+    message: `Dish id does not match route id. Dish: ${id}, Route: ${dishId}`,
+  });
+}
+
 function dishBodyDataHas(propertyName) {
   return function (req, res, next) {
     const { data = {} } = req.body;
@@ -54,17 +79,24 @@ function create(req, res) {
 function read(req, res) {
   res.json({ data: res.locals.dish });
 }
+// function update(req, res) {
+//   const dish = res.locals.dish;
+//   const { data: { name, description, price, image_url } = {} } = req.body;
+
+//   dish.name = name;
+//   dish.description = description;
+//   dish.price = price;
+//   dish.image_url = image_url;
+
+//   res.json({ data: dish });
+// }
+
 function update(req, res) {
-  const dish = res.locals.dish;
-  const { data: { name, description, price, image_url } = {} } = req.body;
-
-  dish.name = name;
-  dish.description = description;
-  dish.price = price;
-  dish.image_url = image_url;
-
-  res.json({ data: dish });
+  const { id } = res.locals.dish;
+  Object.assign(res.locals.dish, req.body.data, { id });
+  res.json({ data: res.locals.dish });
 }
+
 function list(req, res) {
   res.json({ data: dishes });
 }
@@ -81,6 +113,7 @@ module.exports = {
   read: [dishExists, read],
   update: [
     dishExists,
+    matchId,
     dishBodyDataHas("name"),
     dishBodyDataHas("description"),
     dishBodyDataHas("price"),
