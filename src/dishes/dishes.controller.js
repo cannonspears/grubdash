@@ -15,18 +15,6 @@ function dishExists(req, res, next) {
   });
 }
 
-// function dishMatch(req, res, next) {
-//   const { dishId } = req.params;
-//   const { data: { id } = {} } = req.body;
-//   if (dishId === id) {
-//     return next();
-//   }
-//   next({
-//     status: 400,
-//     message: `Data id must match route id: ${id}`,
-//   });
-// }
-
 function matchId(req, res, next) {
   const dishId = req.params.dishId;
   const { id } = req.body.data;
@@ -79,17 +67,6 @@ function create(req, res) {
 function read(req, res) {
   res.json({ data: res.locals.dish });
 }
-// function update(req, res) {
-//   const dish = res.locals.dish;
-//   const { data: { name, description, price, image_url } = {} } = req.body;
-
-//   dish.name = name;
-//   dish.description = description;
-//   dish.price = price;
-//   dish.image_url = image_url;
-
-//   res.json({ data: dish });
-// }
 
 function update(req, res) {
   const { id } = res.locals.dish;
