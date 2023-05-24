@@ -2,6 +2,8 @@
 
 GrubDash is a Full Stack application that allows users to simulate ordering dishes online. The Front-end (not included) was created by Thinkful, and students were tasked with creating the server that connects to two resources, dishes and orders, and route appropriately.
 
+For the frontend, please visit [this link.](https://github.com/Thinkful-Ed/starter-grub-dash-front-end)
+
 ## Getting Started
 
 To get started with this project, follow these steps:
