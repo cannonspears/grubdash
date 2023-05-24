@@ -1,6 +1,6 @@
-# GrubDash Back End Application
+# GrubDash Back-end Application
 
-GrubDash is a Full Stack application that allows users to simulate ordering dishes online. The Front End (not included) was created by Thinkful, and students were tasked with creating the server that connects to two resources, dishes and orders, to route appropriately.
+GrubDash is a Full Stack application that allows users to simulate ordering dishes online. The Front-end (not included) was created by Thinkful, and students were tasked with creating the server that connects to two resources, dishes and orders, and route appropriately.
 
 ## Getting Started
 
@@ -17,4 +17,4 @@ This project includes a set of tests that can be run using the command line. To 
 
 ## Author
 
-This project was created by Thinkful and completed by Cannon Spears.
+This project was created by Cannon Spears in association with Thinkful.
